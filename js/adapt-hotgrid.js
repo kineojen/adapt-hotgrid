@@ -1,126 +1,126 @@
 
 define([
-    'core/js/adapt',
-    'core/js/views/componentView'
+  'core/js/adapt',
+  'core/js/views/componentView'
 ], function(Adapt, ComponentView) {
 
-    var Hotgrid = ComponentView.extend({
+  var Hotgrid = ComponentView.extend({
 
-        events: {
-            'click .hotgrid-item-image': 'onItemClicked'
-        },
+    events: {
+      'click .hotgrid__grid-item-image': 'onItemClicked'
+    },
 
-        isPopupOpen: false,
+    isPopupOpen: false,
 
-        preRender: function () {
-            _.each(this.model.get('_items'), function(item) {
-                if (item._graphic.srcHover && item._graphic.srcVisited) {
-                    item._graphic.hasImageStates = true;
-                }
-            });
-
-            this.listenTo(Adapt, 'device:changed', this.resizeControl);
-
-            this.setDeviceSize();
-
-            this.checkIfResetOnRevisit();
-        },
-
-        setDeviceSize: function() {
-            if (Adapt.device.screenSize === 'large') {
-                this.$el.addClass('desktop').removeClass('mobile');
-                this.model.set('_isDesktop', true);
-            } else {
-                this.$el.addClass('mobile').removeClass('desktop');
-                this.model.set('_isDesktop', false);
-            }
-        },
-
-        checkIfResetOnRevisit: function() {
-            var isResetOnRevisit = this.model.get('_isResetOnRevisit');
-
-            // If reset is enabled set defaults
-            if (isResetOnRevisit) {
-                this.model.reset(isResetOnRevisit);
-
-                _.each(this.model.get('_items'), function(item) {
-                    item._isVisited = false;
-                });
-            }
-        },
-
-        postRender: function() {
-            this.setUpColumns();
-            this.$('.hotgrid-widget').imageready(this.setReadyStatus.bind(this));
-        },
-
-        resizeControl: function() {
-            this.setDeviceSize();
-            this.render();
-        },
-
-        setUpColumns: function() {
-            var columns = this.model.get('_columns');
-
-            if (columns && Adapt.device.screenSize === 'large') {
-                this.$('.hotgrid-grid-item').css('width', (100 / columns) + '%');
-            }
-        },
-
-        onItemClicked: function(event) {
-            if (event) event.preventDefault();
-
-            var $link = $(event.currentTarget);
-            var $item = $link.parent();
-            var itemModel = this.model.get('_items')[$item.index()];
-
-            if(!itemModel._isVisited) {
-                $link.addClass('visited');
-                itemModel._isVisited = true;
-                // append the word 'visited.' to the link's aria-label
-                var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
-                $link.attr('aria-label', function(index, val) {
-                    return val + " " + visitedLabel;
-                });
-            }
-
-            this.showItemContent(itemModel);
-        },
-
-        showItemContent: function(itemModel) {
-            if(this.isPopupOpen) return;// ensure multiple clicks don't open multiple notify popups
-
-            Adapt.trigger('notify:popup', {
-                title: itemModel.title,
-                body: "<div class='hotgrid-notify-container'><div class='hotgrid-notify-body'>" + itemModel.body + "</div>" +
-					"<img class='hotgrid-notify-graphic' src='" +
-                    itemModel._itemGraphic.src + "' alt='" +
-                    itemModel._itemGraphic.alt + "'/></div>"
-            });
-
-            this.isPopupOpen = true;
-
-            Adapt.once('notify:closed', function() {
-                this.isPopupOpen = false;
-                this.evaluateCompletion();
-            }.bind(this));
-        },
-
-        getVisitedItems: function() {
-            return _.filter(this.model.get('_items'), function(item) {
-                return item._isVisited;
-            });
-        },
-
-        evaluateCompletion: function() {
-            if (this.getVisitedItems().length === this.model.get('_items').length) {
-                this.setCompletionStatus();
-            }
+    preRender: function () {
+      _.each(this.model.get('_items'), function(item) {
+        if (item._graphic.srcHover && item._graphic.srcVisited) {
+          item._graphic.hasImageStates = true;
         }
+      });
 
-    },{
-        template: "hotgrid"
-    });
+      this.listenTo(Adapt, 'device:changed', this.resizeControl);
 
-    return Adapt.register("hotgrid", Hotgrid);
+      this.setDeviceSize();
+
+      this.checkIfResetOnRevisit();
+    },
+
+    setDeviceSize: function() {
+      if (Adapt.device.screenSize === 'large') {
+        this.$el.addClass('desktop').removeClass('mobile');
+        this.model.set('_isDesktop', true);
+      } else {
+        this.$el.addClass('mobile').removeClass('desktop');
+        this.model.set('_isDesktop', false);
+      }
+    },
+
+    checkIfResetOnRevisit: function() {
+      var isResetOnRevisit = this.model.get('_isResetOnRevisit');
+
+      // If reset is enabled set defaults
+      if (isResetOnRevisit) {
+        this.model.reset(isResetOnRevisit);
+
+        _.each(this.model.get('_items'), function(item) {
+          item._isVisited = false;
+        });
+      }
+    },
+
+    postRender: function() {
+      this.setUpColumns();
+      this.$('.hotgrid__widget').imageready(this.setReadyStatus.bind(this));
+    },
+
+    resizeControl: function() {
+      this.setDeviceSize();
+      this.render();
+    },
+
+    setUpColumns: function() {
+      var columns = this.model.get('_columns');
+
+      if (columns && Adapt.device.screenSize === 'large') {
+        this.$('.hotgrid__grid-item').css('width', (100 / columns - 1) + '%');
+      }
+    },
+
+    onItemClicked: function(event) {
+      if (event) event.preventDefault();
+
+      var $link = $(event.currentTarget);
+      var $item = $link.parent();
+      var itemModel = this.model.get('_items')[$item.index()];
+
+      if(!itemModel._isVisited) {
+        $link.addClass('visited');
+        itemModel._isVisited = true;
+        // append the word 'visited.' to the link's aria-label
+        var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
+        $link.attr('aria-label', function(index, val) {
+          return val + " " + visitedLabel;
+        });
+      }
+
+      this.showItemContent(itemModel);
+    },
+
+    showItemContent: function(itemModel) {
+      if(this.isPopupOpen) return;// ensure multiple clicks don't open multiple notify popups
+
+      Adapt.trigger('notify:popup', {
+        title: itemModel.title,
+        body: "<div class='hotgrid__notify-container'><div class='hotgrid__notify-body'>" + itemModel.body + "</div>" + "<div class='hotgrid__notify-graphic'>" +
+        "<img src='" +
+          itemModel._itemGraphic.src + "' alt='" +
+          itemModel._itemGraphic.alt + "'/></div></div>"
+      });
+
+      this.isPopupOpen = true;
+
+      Adapt.once('notify:closed', function() {
+        this.isPopupOpen = false;
+        this.evaluateCompletion();
+      }.bind(this));
+    },
+
+    getVisitedItems: function() {
+      return _.filter(this.model.get('_items'), function(item) {
+        return item._isVisited;
+      });
+    },
+
+    evaluateCompletion: function() {
+      if (this.getVisitedItems().length === this.model.get('_items').length) {
+        this.setCompletionStatus();
+      }
+    }
+
+  },{
+    template: "hotgrid"
+  });
+
+  return Adapt.register("hotgrid", Hotgrid);
 });

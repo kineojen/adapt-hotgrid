@@ -1,167 +1,198 @@
-.hotgrid-component {
-	.hotgrid-widget {
-		// Font size set to 0 so there's no gap between items
-		font-size: 0;
-		position: relative;
-		text-align: center;
-	}
+.hotgrid {
+  //---------------------
+  //Item layout
+  //---------------------
+  &__grid-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-	.hotgrid-grid-item {
-		display: inline-block;
-		text-align: center;
-		vertical-align: top;
-		width: 50%;
-	}
+  &__grid-item {
+    width: 49%;
+    margin: 0 0.5% 1%;
+  }
 
-	.hotgrid-item-image {
-		display: block;
-		margin: 2.5%;
-		width: 95%;
+  //----------------------
+  //Popup (notify) layout
+  //----------------------
+  &__notify-container {
+    display: flex;
+  }
 
-		img {
-			display: block;
-			transition: all 0.25s;
-		}
+  &__notify-body {
+    width: 100%;
+  }
 
-		&.hotgrid-item-states-image {
-			.item-states-image.default;
-
-			&.visited {
-				.item-states-image.visited;
-			}
-
-			.no-touch &:hover {
-				.item-states-image.hover;
-			}
-		}
-
-		@media all and (max-width:(@device-width-medium - 1)) {
-			margin: 5px;
-		}
-	}
-
-	.hotgrid-item-title {
-		font-size: @body-text-font-size;
-	}
-
-    //removes tap highlighting on webkit-based browsers found in some mobile devices
-    button.base.hotgrid-item-image {
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
-    }
+  &__notify-graphic {
+    width: 100%;
+  }
 }
 
-// Hotgrid item states - images
-// ==============================
-.item-states-image {
-	.default {
-		img.hotgrid-item-image-hover {
-			display: none;
-		}
+// .hotgrid-component {
+// 	.hotgrid-widget {
+// 		// Font size set to 0 so there's no gap between items
+// 		font-size: 0;
+// 		position: relative;
+// 		text-align: center;
+// 	}
 
-		img.hotgrid-item-image-visited {
-			display: none;
-		}
-	}
+// 	.hotgrid-grid-item {
+// 		display: inline-block;
+// 		text-align: center;
+// 		vertical-align: top;
+// 		width: 50%;
+// 	}
 
-	.hover {
-		> img {
-			display: none;
-		}
+// 	.hotgrid-item-image {
+// 		display: block;
+// 		margin: 2.5%;
+// 		width: 95%;
 
-		img.hotgrid-item-image-hover {
-			display: block;
-		}
+// 		img {
+// 			display: block;
+// 			transition: all 0.25s;
+// 		}
 
-		img.hotgrid-item-image-visited {
-			display: none;
-		}
-	}
+// 		&.hotgrid-item-states-image {
+// 			.item-states-image.default;
 
-	.visited {
-		> img {
-			display: none;
-		}
+// 			&.visited {
+// 				.item-states-image.visited;
+// 			}
 
-		img.hotgrid-item-image-hover {
-			display: none !important;
-		}
+// 			.no-touch &:hover {
+// 				.item-states-image.hover;
+// 			}
+// 		}
 
-		img.hotgrid-item-image-visited {
-			display: block !important;
-		}
-	}
-}
+// 		@media all and (max-width:(@device-width-medium - 1)) {
+// 			margin: 5px;
+// 		}
+// 	}
 
-// Hotgrid item states - css
-// ==============================
-.hotgrid-component {
-	.hotgrid-item-states-css {
-		border: 3px solid transparent;
-		/* uncomment if circular items */
-		// border-radius: 50%;
+// 	.hotgrid-item-title {
+// 		font-size: @body-text-font-size;
+// 	}
 
-		.no-touch &:hover {
-			border: 3px solid @item-color;
-		}
+//     //removes tap highlighting on webkit-based browsers found in some mobile devices
+//     button.base.hotgrid-item-image {
+//         -webkit-tap-highlight-color: rgba(0,0,0,0);
+//     }
+// }
 
-		&.visited {
-			position: relative;
+// // Hotgrid item states - images
+// // ==============================
+// .item-states-image {
+// 	.default {
+// 		img.hotgrid-item-image-hover {
+// 			display: none;
+// 		}
 
-			&:after {
-				content: " ";
-				display: block;
-				height: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				background-color: fade(@item-color-disabled, 50%);
-				/* uncomment if circular items */
-				//border-radius: 50%;
-			}
-		}
-	}
-}
+// 		img.hotgrid-item-image-visited {
+// 			display: none;
+// 		}
+// 	}
 
-// Hotgrid notify content layout
-// ==============================
-.hotgrid-notify-container {
-	font-size: 0;
+// 	.hover {
+// 		> img {
+// 			display: none;
+// 		}
 
-	.hotgrid-notify-body {
-		display: inline-block;
-		font-size: @body-text-font-size;
-		margin-right: 2%;
-		vertical-align: top;
-		width: 58%;
+// 		img.hotgrid-item-image-hover {
+// 			display: block;
+// 		}
 
-		.dir-rtl & {
-			margin-right: inherit;
-			margin-left: 2%;
-		}
+// 		img.hotgrid-item-image-visited {
+// 			display: none;
+// 		}
+// 	}
 
-		@media (max-width: @device-width-medium) {
-			margin-right: 0;
-			width: 100%;
+// 	.visited {
+// 		> img {
+// 			display: none;
+// 		}
 
-			.dir-rtl & {
-				margin-right: inherit;
-				margin-left: 0;
-			}
-		}
+// 		img.hotgrid-item-image-hover {
+// 			display: none !important;
+// 		}
 
-	}
+// 		img.hotgrid-item-image-visited {
+// 			display: block !important;
+// 		}
+// 	}
+// }
 
-	.hotgrid-notify-graphic {
-		display: inline-block;
-		vertical-align: top;
-		width: 40%;
+// // Hotgrid item states - css
+// // ==============================
+// .hotgrid-component {
+// 	.hotgrid-item-states-css {
+// 		border: 3px solid transparent;
+// 		/* uncomment if circular items */
+// 		// border-radius: 50%;
 
-		@media (max-width: @device-width-medium) {
-			display: block;
-			margin: 20px auto 0;
-			width: 75%;
-		}
-	}
-}
+// 		.no-touch &:hover {
+// 			border: 3px solid @item-color;
+// 		}
+
+// 		&.visited {
+// 			position: relative;
+
+// 			&:after {
+// 				content: " ";
+// 				display: block;
+// 				height: 100%;
+// 				position: absolute;
+// 				top: 0;
+// 				left: 0;
+// 				width: 100%;
+// 				background-color: fade(@item-color-disabled, 50%);
+// 				/* uncomment if circular items */
+// 				//border-radius: 50%;
+// 			}
+// 		}
+// 	}
+// }
+
+// // Hotgrid notify content layout
+// // ==============================
+// .hotgrid-notify-container {
+// 	font-size: 0;
+
+// 	.hotgrid-notify-body {
+// 		display: inline-block;
+// 		font-size: @body-text-font-size;
+// 		margin-right: 2%;
+// 		vertical-align: top;
+// 		width: 58%;
+
+// 		.dir-rtl & {
+// 			margin-right: inherit;
+// 			margin-left: 2%;
+// 		}
+
+// 		@media (max-width: @device-width-medium) {
+// 			margin-right: 0;
+// 			width: 100%;
+
+// 			.dir-rtl & {
+// 				margin-right: inherit;
+// 				margin-left: 0;
+// 			}
+// 		}
+
+// 	}
+
+// 	.hotgrid-notify-graphic {
+// 		display: inline-block;
+// 		vertical-align: top;
+// 		width: 40%;
+
+// 		@media (max-width: @device-width-medium) {
+// 			display: block;
+// 			margin: 20px auto 0;
+// 			width: 75%;
+// 		}
+// 	}
+// }
 
