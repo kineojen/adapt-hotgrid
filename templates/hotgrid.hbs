@@ -1,24 +1,25 @@
 <div class="component__inner hotgrid__inner" role="region" aria-label="{{_globals._components._hotgrid.ariaRegion}}" {{#if _globals._components._hotgrid.ariaRegion}}tabindex="0"{{/if}}>
   {{> component this}}
-  <div class="component__widget hotgrid__widget">
 
-    <div class="hotgrid__grid">
-      <div class="hotgrid__grid-inner clearfix">
+  <div class="component__widget hotgrid__widget">
+    <div class="hotgrid__widget-inner">
 
         {{#each _items}}
-        <div class="hotgrid__grid-item">
+        <div class="hotgrid__item">
 
-          <button class="base hotgrid__grid-item-image hotgrid__grid-item-states-{{#if _graphic.hasImageStates}}image{{else}}css{{/if}} {{#if _isVisited}}visited{{/if}} {{#if ../_hasRoundedImages}}border-radius{{/if}}" aria-label="{{#if _graphic.title}}{{_graphic.title}}.{{/if}}{{#if _graphic.alt}} {{_graphic.alt}}.{{/if}}{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
-            <img src="{{_graphic.src}}"/>
+          <button class="btn hotgrid__item-inner hotgrid__item-btn-states-{{#if _graphic.hasImageStates}}has-image-states{{else}}has-css-states{{/if}} {{#if _isVisited}}visited{{/if}} {{#if ../_hasRoundedImages}}border-radius{{/if}} js-hotgrid-item-click" aria-label="{{#if _graphic.title}}{{_graphic.title}}.{{/if}}{{#if _graphic.alt}} {{_graphic.alt}}.{{/if}}{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
+            <div class="hotgrid__item-image">
+              <img src="{{_graphic.src}}"/>
 
-            {{#if _graphic.hasImageStates}}
-            <img src="{{_graphic.srcHover}}" class="hotgrid__grid-item-image-hover"/>
-            <img src="{{_graphic.srcVisited}}" class="hotgrid__grid-item-image-visited"/>
-            {{/if}}
+              {{#if _graphic.hasImageStates}}
+              <img src="{{_graphic.srcHover}}" class="hotgrid__item-image-hover"/>
+              <img src="{{_graphic.srcVisited}}" class="hotgrid__item-image-visited"/>
+              {{/if}}
+            </div>
 
             {{#if _graphic.title}}
-            <div class="hotgrid__grid-item-title">
-              <div class="hotgrid__grid-item-title-inner">
+            <div class="hotgrid__item-title">
+              <div class="hotgrid__item-title-inner">
                 {{{_graphic.title}}}
               </div>
             </div>
@@ -30,7 +31,6 @@
         {{/each}}
 
       </div>
-    </div>
-
   </div>
+
 </div>

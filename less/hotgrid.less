@@ -2,17 +2,30 @@
   //---------------------
   //Item layout
   //---------------------
-  &__grid-inner {
+  &__widget-inner {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
 
-  &__grid-item {
+  &__item {
     width: 49%;
     margin: 0 0.5% 1%;
   }
 
+  &__item-btn {
+    border: 3px solid transparent;
+  }
+
+  //---------------------
+  //Item states
+  //---------------------
+  &__item-btn-states-css {
+    .no-touch &:hover {
+      border: 3px solid black;
+    }
+  }
+  
   //----------------------
   //Popup (notify) layout
   //----------------------
@@ -25,7 +38,8 @@
   }
 
   &__notify-graphic {
-    width: 100%;
+    width: 96%;
+    margin: 0 2%;
   }
 }
 

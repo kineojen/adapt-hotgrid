@@ -7,7 +7,7 @@ define([
   var Hotgrid = ComponentView.extend({
 
     events: {
-      'click .hotgrid__grid-item-image': 'onItemClicked'
+      'click .js-hotgrid-item-click': 'onItemClicked'
     },
 
     isPopupOpen: false,
@@ -63,7 +63,7 @@ define([
       var columns = this.model.get('_columns');
 
       if (columns && Adapt.device.screenSize === 'large') {
-        this.$('.hotgrid__grid-item').css('width', (100 / columns - 1) + '%');
+        this.$('.hotgrid__item').css('width', (100 / columns - 1) + '%');
       }
     },
 
