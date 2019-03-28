@@ -75,7 +75,7 @@ define([
       var itemModel = this.model.get('_items')[$item.index()];
 
       if(!itemModel._isVisited) {
-        $link.addClass('visited');
+        $link.addClass('is-visited');
         itemModel._isVisited = true;
         // append the word 'visited.' to the link's aria-label
         var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";

@@ -29,6 +29,14 @@
       "help": "This is the instruction text",
       "translatable": true
     },
+    "_hasRoundImages": {
+      "type":"boolean",
+      "required": false,
+      "inputType": "Boolean",
+      "validators": [],
+      "help": "Select if the hotgrid images are round",
+      "title": "Round images"                                 
+    },
     "_columns": {
       "type": "number",
       "required": true,
