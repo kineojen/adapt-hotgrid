@@ -10,11 +10,11 @@
           <button class="btn hotgrid__item-btn {{#if _graphic.hasImageStates}}has-image-states{{else}}has-css-states{{/if}} {{#if ../_hasRoundImages}}is-round{{/if}} js-hotgrid-item-click" aria-label="{{#if _graphic.title}}{{_graphic.title}}.{{/if}}{{#if _graphic.alt}} {{_graphic.alt}}.{{/if}}{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
           
             <div class="hotgrid__item-image">
-              <img src="{{_graphic.src}}"/>
+              <img class="hotgrid__item-image-normal" src="{{_graphic.src}}"/>
 
               {{#if _graphic.hasImageStates}}
-              <img src="{{_graphic.srcHover}}" class="hotgrid__item-image-hover"/>
-              <img src="{{_graphic.srcVisited}}" class="hotgrid__item-image-visited"/>
+              <img class="hotgrid__item-image-hover" src="{{_graphic.srcHover}}"/>
+              <img class="hotgrid__item-image-visited" src="{{_graphic.srcVisited}}"/>
               {{/if}}
             </div>
 

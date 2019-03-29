@@ -14,7 +14,7 @@
   }
 
   &__item-btn {
-    border: 3px solid transparent;
+    background-color: transparent;
 
     &.is-round {
       border-radius: 50%;
@@ -23,10 +23,11 @@
   }
 
   //---------------------
-  //Item states
+  //Item css states
   //---------------------
   &__item-btn.has-css-states {
     position: relative;
+    border: 3px solid transparent;
 
     .no-touch &:hover {
       border-color: black;
@@ -43,14 +44,39 @@
         background-color: fade(black, 30%);
       }
     }
+  }
 
-    &.is-round {
-      &:before {
-        border-radius: 50%;
+  //---------------------
+  //Item image states
+  //---------------------
+  &__item-btn.has-image-states {
+    .hotgrid__item-image-hover,
+    .hotgrid__item-image-visited {
+      display: none;
+    }
+
+    .no-touch &:hover {
+      .hotgrid__item-image-hover {
+        display: block;
+      }
+
+      .hotgrid__item-image-normal,
+      .hotgrid__item-image-visited {
+        display: none;
+      }
+    }
+
+    &.is-visited {
+      .hotgrid__item-image-visited {
+        display: block;
+      }
+
+      .hotgrid__item-image-normal,
+      .hotgrid__item-image-hover {
+        display: none;
       }
     }
   }
-  
   
   //----------------------
   //Popup (notify) layout
