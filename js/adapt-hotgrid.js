@@ -92,10 +92,8 @@ define([
 
       Adapt.trigger('notify:popup', {
         title: itemModel.title,
-        body: "<div class='hotgrid__notify-container'><div class='hotgrid__notify-body'>" + itemModel.body + "</div>" + "<div class='hotgrid__notify-graphic'>" +
-        "<img src='" +
-          itemModel._itemGraphic.src + "' alt='" +
-          itemModel._itemGraphic.alt + "'/></div></div>"
+        body: itemModel.body,
+        graphic: itemModel._itemGraphic
       });
 
       this.isPopupOpen = true;
